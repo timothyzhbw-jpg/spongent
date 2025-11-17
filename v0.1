@@ -1,0 +1,78 @@
+# search_v0_1.py
+
+# --- 1. Your "Database" (DATABASE) ---
+# The database is hard-coded at the top of the script (English Version)
+DATABASE = [
+    {
+        "title": "K-On!",
+        "plot": "Five high school girls join the Light Music Club, but they mostly drink tea, eat snacks, and occasionally practice as a band."
+    },
+    {
+        "title": "Bocchi the Rock!",
+        "plot": "A girl with extreme social anxiety named 'Bocchi' becomes a guitar hero online. She is pulled into a real-life group called 'Kessoku Band'."
+    },
+    {
+        "title": "BanG Dream! (Poppin'Party)",
+        "plot": "A girl named Kasumi finds a star-shaped guitar and is inspired to form her own all-girl band, 'Poppin'Party'."
+    },
+    {
+        "title": "The Demon Girl Next Door (Machikado Mazoku)",
+        "plot": "A normal high school girl named Yuko (Shamiko) suddenly awakens her demon powers and is tasked with defeating the local Magical Girl, Momo."
+    },
+    {
+        "title": "Lucky Star",
+        "plot": "Depicts the daily lives of four high school girls, including their discussions about anime, manga, and chocolate coronet bread."
+    },
+    {
+        "title": "Is the Order a Rabbit? (GochiUsa)",
+        "plot": "A girl named Cocoa moves into a new town and begins working at the 'Rabbit House' cafe, living a cute daily life with her new friends Chino and others."
+    },
+    {
+        "title": "Non Non Biyori",
+        "plot": "In a quiet countryside village, students of different grades share a single classroom. They spend their idyllic and peaceful days exploring."
+    }
+]
+
+# --- 2. Your "Search Logic" (FUNCTION) ---
+def find_acg(search_keyword):
+    """
+    This is a simple search function.
+    It loops through the database and checks if the keyword is in the 'plot' or 'title'.
+    """
+    
+    print(f"\n--- Searching for keyword: '{search_keyword}' ---")
+    
+    found_results = [] # Create an empty list to store the results
+
+    # Loop through your database using a 'for' loop
+    for entry in DATABASE:
+        title = entry["title"]
+        plot = entry["plot"]
+        
+        # Check if the keyword is in the plot or title using 'if'
+        # We use .lower() to make the search case-insensitive
+        if search_keyword.lower() in plot.lower() or \
+           search_keyword.lower() in title.lower():
+            
+            found_results.append(title) # If found, add it to the results list
+
+    # Return the results
+    return found_results
+
+# --- 3. Your "Main Program" (MAIN EXECUTION) ---
+# This code only runs when you execute the file directly
+if __name__ == "__main__":
+    
+    # (The prompt is also updated!)
+    user_query = input("Please enter a plot keyword to search for (e.g., 'band', 'rabbit', or 'demon'): ")
+
+    # Call your search function
+    results = find_acg(user_query)
+
+    # Print the results
+    if results: # If the results list is not empty
+        print("\n✅ Found results! See below:")
+        for title in results:
+            print(f"  - {title}")
+    else: # If the results list is empty
+        print(f"\n❌ Sorry, no entries found containing '{user_query}'.")
